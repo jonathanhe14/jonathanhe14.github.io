@@ -8,18 +8,23 @@
     <p id="ubicacion"></p>
 
     <script>
-        function obtenerUbicacion() {
-            if ("geolocation" in navigator) {
-                navigator.geolocation.getCurrentPosition(function (position) {
-                    var latitude = position.coords.latitude;
-                    var longitude = position.coords.longitude;
-                    var ubicacion = "Latitud: " + latitude + ", Longitud: " + longitude;
-                    document.getElementById("ubicacion").textContent = ubicacion;
-                });
-            } else {
-                alert("La geolocalización no está disponible en este navegador.");
-            }
-        }
+function obtenerUbicacion() {
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+            var ubicacion = "Latitud: " + latitude + ", Longitud: " + longitude;
+            document.getElementById("ubicacion").textContent = ubicacion;
+        }, function (error) {
+            // Manejo de errores
+            alert("Error al obtener la ubicación: " + error.message);
+        });
+    } else {
+        alert("La geolocalización no está disponible en este navegador.");
+    }
+}
     </script>
 </body>
 </html>
+
+
