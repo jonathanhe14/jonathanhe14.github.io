@@ -6,7 +6,7 @@
 <body>
     <button onclick="obtenerUbicacion()">Obtener Ubicación</button>
     <p id="ubicacion"></p>
-
+    <p id="confirmacion">Hola</p>
     <script>
 function obtenerUbicacion() {
     if ("geolocation" in navigator) {
@@ -15,6 +15,7 @@ function obtenerUbicacion() {
             var longitude = position.coords.longitude;
             var ubicacion = "Latitud: " + latitude + ", Longitud: " + longitude;
             document.getElementById("ubicacion").textContent = ubicacion;
+            document.getElementById("confirmacion").textContent ="Hola mundo"
         }, function (error) {
             // Manejo de errores
             alert("Error al obtener la ubicación: " + error.message);
