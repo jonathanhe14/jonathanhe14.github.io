@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Obtener Ubicación</title>
+</head>
+<body>
+    <button onclick="obtenerUbicacion()">Obtener Ubicación</button>
+    <p id="ubicacion"></p>
+
+    <script>
+        function obtenerUbicacion() {
+            if ("geolocation" in navigator) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var latitude = position.coords.latitude;
+                    var longitude = position.coords.longitude;
+                    var ubicacion = "Latitud: " + latitude + ", Longitud: " + longitude;
+                    document.getElementById("ubicacion").textContent = ubicacion;
+                });
+            } else {
+                alert("La geolocalización no está disponible en este navegador.");
+            }
+        }
+    </script>
+</body>
+</html>
