@@ -6,7 +6,7 @@
 <body>
     <button onclick="obtenerUbicacion()">Obtener Ubicación</button>
     <p id="ubicacion"></p>
-    <p id="confirmacion">Hola</p>
+    <p id="googlemaps"></p>
     <script>
 function obtenerUbicacion() {
     if ("geolocation" in navigator) {
@@ -15,7 +15,7 @@ function obtenerUbicacion() {
             var longitude = position.coords.longitude;
             var ubicacion = "Latitud: " + latitude + ", Longitud: " + longitude;
             document.getElementById("ubicacion").textContent = ubicacion;
-            document.getElementById("confirmacion").textContent ="Hola mundo"
+            obtenerUbicacion(latitude,longitude);
         }, function (error) {
             // Manejo de errores
             alert("Error al obtener la ubicación: " + error.message);
@@ -23,6 +23,26 @@ function obtenerUbicacion() {
     } else {
         alert("La geolocalización no está disponible en este navegador.");
     }
+
+
+    function obtenerUbicacion(latitud, longitud) {
+  const coordenadas = new google.maps.LatLng(latitud, longitud);
+  const geocoder = new google.maps.Geocoder();
+
+  geocoder.geocode({ 'location': coordenadas }, function(results, status) {
+    if (status === 'OK') {
+      if (results[0]) {
+        const ubicacion = results[0].formatted_address;
+        console.log('Ubicación encontrada:', ubicación);
+      } else {
+        console.log('No se encontró ninguna ubicación.');
+      }
+    } else {
+      console.error('Error al obtener la ubicación:', status);
+    }
+  });
+}
+
 }
     </script>
 </body>
